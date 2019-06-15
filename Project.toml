@@ -1,0 +1,4 @@
+name = "LakeBiquads"
+uuid = "bf1a9240-8fab-11e9-1abc-230446f3bce0"
+authors = ["Johannes <jcmf.schule@gmail.com>"]
+version = "0.1.0"
