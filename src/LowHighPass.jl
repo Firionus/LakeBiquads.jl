@@ -74,7 +74,11 @@ function LowPass(type::Symbol, f, dBperOct)
 	return PassFilter(responsetype, type, dBperOct)
 end
 
-"Return Bessel prototype that fits Lake EQ prototype"
+"""
+	Bessel(N::Int)
+
+Return analog Bessel prototype as DSP.ZeroPoleGain that fits Lake EQ after transformation
+"""
 function Bessel(N::Int)
 	b(n::Int) = factorial(2*N-n)//(2^(N-n)*factorial(N-n)*factorial(n))
 	denominator = [b(n)|>Float64 for n=N:-1:0]
