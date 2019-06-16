@@ -11,7 +11,7 @@ Linkwitz-Riley respectively. `dBperOct` must be one of [6, 12, 18, 24, 30, 36, 4
 
 The design for the **Butterworth** filters uses the implementation by DSP.jl.
 
-The **Linkiwtz-Riley** filter is constructed from two of these Butterworth stages
+The **Linkwitz-Riley** filter is constructed from two of these Butterworth stages
 at the same frequency.
 
 The **Bessel** filter is constructed from the Polynomial Representation given in:
