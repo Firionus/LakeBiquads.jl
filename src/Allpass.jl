@@ -36,7 +36,7 @@ function AllPass(f, order, BWoct)
 		result = [b0 b1 b2 a1 a2]./a0
 		Filter = SecondOrderSections(Biquad(result...))
 	elseif order==1
-		analogPrototype = ZeroPoleGain([1], [-1], -1)
+		analogPrototype = ZeroPoleGain([1.], [-1.], -1.)
 		Filter = convert(SecondOrderSections, digitalfilter(Lowpass(f, fs=fs), analogPrototype))
 	else
 		error(string("Allpass order must be 1 or 2. Was given ", order))
