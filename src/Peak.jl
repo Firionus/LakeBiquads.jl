@@ -3,7 +3,7 @@
 
 Return 96 kHz Biquad as DSP.SecondOrderSections that resembles Lake Peak EQ.
 
-The algorithm is a modified version of the method first presented in
+The algorithm is a modified version of the method first presented in:
 
 Orfanidis, JAES 1997 Issue 6: "Digital Parametric Equalizer Design with Prescribed Nyquist-Frequency Gain"
 http://www.aes.org/e-lib/browse.cfm?elib=7854

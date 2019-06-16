@@ -1,6 +1,6 @@
 module LakeBiquads
 
-export EQBiquads, Array, AllPass, HighPass, LowPass, Peak, HighShelf, LowShelf
+export EQBiquads, BiquadArray, AllPass, HighPass, LowPass, Peak, HighShelf, LowShelf, Bessel
 
 using DelimitedFiles, DSP, NLsolve
 
@@ -12,7 +12,7 @@ include("LowHighPass.jl")
 include("Allpass.jl")
 
 """
-	Array(x::SecondOrderSections)
+	BiquadArray(x::SecondOrderSections)
 
 Construct 2D Array of Biquad Parameters from `x`.
 
@@ -25,7 +25,7 @@ The returned Array for 2 Biquads is of the structure:
 
 Note that the Gain of the SecondOrderSections is spread evenly over all Biquads.
 """
-function Array(x::SecondOrderSections)
+function BiquadArray(x::SecondOrderSections)
 	biquads = x.biquads
 	n = length(biquads)
 	gain = x.g^(1/n)
@@ -60,19 +60,19 @@ LS f dBGain BWoct
 
 # Example
 
-`EQBiquads("myEQ.txt")`
+
+	EQBiquads("myEQ.txt")
+
 
 would create a new file named "myEQBiquads.txt" containing Biquads.
 
 # EQ File Examples
 
-Butterworth Lowpass with 30 dB/oct fall-off at 1000 Hz: `LPBT30 1000`
-
-Peak at 1 kHz with 10 dB Gain and a Bandwidth of 1 octave: `P 1k 10 1`
-
-Allpass at 3 kHz of order 1 with a Bandwidth of 2 octaves: `AP 3e3 1 2`
-
-(Note that Allpass order may only be 1 or 2, as in the Lake Controller.)
+```
+LPBT30 1000  #Butterworth Lowpass with 30 dB/oct fall-off at 1000 Hz
+P 1k 10 1    #Peak at 1 kHz with 10 dB Gain and a Bandwidth of 1 octave
+AP 3e3 1 2   #Allpass at 3 kHz of order 1 with a Bandwidth of 2 octaves (order may only be 1 or 2)
+```
 """
 function EQBiquads(filename)
 	EQs = readdlm(filename, ' ')
@@ -92,7 +92,7 @@ function EQBiquads(filename)
 				BWoct = EQs[i,4]
 			end
 			if EQtype == "P"
-				BiquadParams = [BiquadParams; Peak(f, dBGain, BWoct)|>Array]
+				BiquadParams = [BiquadParams; Peak(f, dBGain, BWoct)|>BiquadArray]
 			elseif EQtype[1:2] in ["HP", "LP"]
 				type = Symbol(EQtype[3:4])
 				dBperOct = parse(Int64, EQtype[5:end])
@@ -101,13 +101,13 @@ function EQBiquads(filename)
 				else
 					bf = LowPass(type, f, dBperOct)
 				end
-				BiquadParams = [BiquadParams; Array(bf)]
+				BiquadParams = [BiquadParams; BiquadArray(bf)]
 			elseif EQtype == "HS"
-				BiquadParams = [BiquadParams; HighShelf(f, dBGain, BWoct)|>Array]
+				BiquadParams = [BiquadParams; HighShelf(f, dBGain, BWoct)|>BiquadArray]
 			elseif EQtype == "LS"
-				BiquadParams = [BiquadParams; LowShelf(f, dBGain, BWoct)|>Array]
+				BiquadParams = [BiquadParams; LowShelf(f, dBGain, BWoct)|>BiquadArray]
 			elseif EQtype == "AP"
-				BiquadParams = [BiquadParams; AllPass(f, dBGain, BWoct)|>Array] #dBGain is used here as specifying the order of the AllPass, because it controls the amount of added phase as Gain in a Peak EQ
+				BiquadParams = [BiquadParams; AllPass(f, dBGain, BWoct)|>BiquadArray] #dBGain is used here as specifying the order of the AllPass, because it controls the amount of added phase as Gain in a Peak EQ
 			else
 				error(string("Unknown Filter type. Execution stopped and no changes were written to filesystem. "))
 			end
