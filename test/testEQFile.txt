@@ -1,0 +1,7 @@
+LPBT30 1000  #Butterworth Lowpass with 30 dB/oct fall-off at 1000 Hz
+P 1k 10 1    #Peak at 1 kHz with 10 dB Gain and a Bandwidth of 1 octave
+AP 3e3 1 2   #Allpass at 3 kHz of order 1 with a Bandwidth of 2 octaves (order may only be 1 or 2)
+AP 100 2 3
+HS 1e3 +4 2
+LS 1872 -3.0784 1
+HPBS36 1e3

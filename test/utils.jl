@@ -1,5 +1,5 @@
 using PyPlot
-frequencies = range(20, 20000, length=10000)
+frequencies = range(10, 22000, length=10000)
 
 function show_grid()
 	minorticks_on()
@@ -8,13 +8,13 @@ function show_grid()
 	xlabel("f in Hz")
 end
 
-function magplot(myfilter)
+function magplot(myfilter, frequencies=frequencies)
 	plot(frequencies, 20*log10.(abs.(freqz(myfilter, frequencies, fs))), label="Level/dB")
 	semilogx()
 	show_grid()
 end
 
-function phaseplot(myfilter)
+function phaseplot(myfilter, frequencies=frequencies)
 	plot(frequencies, angle.(freqz(myfilter, frequencies, fs)), label="Phase/rad")
 	semilogx()
 	show_grid()
@@ -30,8 +30,8 @@ function testplot(filename, myfilter)
 	input = readdlm(filename, ';', skipstart=1)
 	plot(input[:,1], input[:,2], label="ref Level/dB")
 	plot(input[:,1], input[:,3]/180*pi, label="ref Phase/rad")
-	magplot(myfilter)
-	phaseplot(myfilter)
+	magplot(myfilter, input[:,1])
+	phaseplot(myfilter, input[:,1])
 	legend()
 end
 
