@@ -7,7 +7,7 @@ makedocs(
     clean=false
 )
 
-cp("docs\\build\\README.md", "README.md")
+cp("docs\\build\\README.md", "README.md", force=true)
 
 # Documenter can also automatically deploy documentation to gh-pages.
 # See "Hosting Documentation" and deploydocs() in the Documenter manual
