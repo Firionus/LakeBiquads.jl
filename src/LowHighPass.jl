@@ -1,7 +1,7 @@
 """
 	HighPass(type::Symbol, f, dBperOct, fs=96e3)
 
-Return 96 kHz Biquad as DSP.SecondOrderSections that resembles the Highpass
+Return Biquad of sampling frequency fs as DSP.SecondOrderSections that resembles the Highpass
 functions of the Lake EQ.
 
 `type` must be one of [:BT, :BS, :LR] resembling Butterworth, Bessel and
@@ -24,11 +24,9 @@ The Bessel filters are constructed from the Polynomial Representation given in:
 
 https://onlinelibrary.wiley.com/doi/pdf/10.1002/9781119011866.app1 (12.6.2019)
 
-Digital Communications with Emphasis on Data Modems: Theory, Analysis, Design, Simulation, Testing, and Applications,
-
-First Edition. Richard W. Middlestead.
-
-© 2017 John Wiley & Sons, Inc. Published 2017 by John Wiley & Sons, Inc.
+(Appendix 1 of *Richard W. Middlestead*:
+Digital Communications with Emphasis on Data Modems: Theory, Analysis, Design, Simulation, Testing, and Applications.
+1st edition, Published 2017 by John Wiley & Sons, Inc.)
 
 The resulting filter is normalized to be -3 dB at 1 rad/s. The -3 dB frequencies
 for all orders of Bessel filters in the Lake processor at a frequency of 1 kHz
@@ -60,7 +58,7 @@ end
 """
 	LowPass(type::Symbol, f, dBperOct, fs=96e3)
 
-Return 96 kHz Biquad as DSP.SecondOrderSections that resembles the Lowpass
+Return Biquad of sampling frequency fs as DSP.SecondOrderSections that resembles the Lowpass
 functions of the Lake EQ.
 
 `type` must be one of [:BT, :BS, :LR] resembling Butterworth, Bessel and
@@ -83,11 +81,9 @@ The Bessel filters are constructed from the Polynomial Representation given in:
 
 https://onlinelibrary.wiley.com/doi/pdf/10.1002/9781119011866.app1 (12.6.2019)
 
-Digital Communications with Emphasis on Data Modems: Theory, Analysis, Design, Simulation, Testing, and Applications,
-
-First Edition. Richard W. Middlestead.
-
-© 2017 John Wiley & Sons, Inc. Published 2017 by John Wiley & Sons, Inc.
+(Appendix 1 of *Richard W. Middlestead*:
+Digital Communications with Emphasis on Data Modems: Theory, Analysis, Design, Simulation, Testing, and Applications.
+1st edition, Published 2017 by John Wiley & Sons, Inc.)
 
 The resulting filter is normalized to be -3 dB at 1 rad/s. The -3 dB frequencies
 for all orders of Bessel filters in the Lake processor at a frequency of 1 kHz

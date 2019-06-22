@@ -1,7 +1,7 @@
 """
 	HighShelf(f, dBGain, BWoct, fs=96e3)
 
-Return 96 kHz Biquad as DSP.SecondOrderSections that resembles Lake High Shelf EQ.
+Return Biquad of sampling frequency fs as DSP.SecondOrderSections that resembles Lake High Shelf EQ.
 
 The implementation is according to:
 
@@ -31,7 +31,7 @@ end
 """
 	LowShelf(f, dBGain, BWoct, fs=96e3)
 
-Return 96 kHz Biquad as DSP.SecondOrderSections that resembles Lake Low Shelf EQ.
+Return Biquad of sampling frequency fs as DSP.SecondOrderSections that resembles Lake Low Shelf EQ.
 
 The implementation is according to:
 

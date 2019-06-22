@@ -1,7 +1,7 @@
 """
 	AllPass(f, order, BWoct, fs=96e3)
 
-Return 96 kHz Biquad as DSP.SecondOrderSections that resembles Lake 1st- or
+Return Biquad of sampling frequency fs as DSP.SecondOrderSections that resembles Lake 1st- or
 2nd-order Allpass.
 
 # Implementation

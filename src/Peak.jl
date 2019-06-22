@@ -1,7 +1,7 @@
 """
 	Peak(f, dBGain, BWoct, fs=96e3)
 
-Return 96 kHz Biquad as DSP.SecondOrderSections that resembles Lake Peak EQ.
+Return Biquad of sampling frequency fs as DSP.SecondOrderSections that resembles Lake Peak EQ.
 
 The algorithm is a modified version of the method first presented in:
 
