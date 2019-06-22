@@ -38,7 +38,7 @@ Install [Julia](https://julialang.org/downloads/).
 Run
 
 ```julia
-]add LakeBiquads
+]add https://github.com/Firionus/LakeBiquads.jl
 ```
 
 and hit Backspace once the installation is done to exit Pkg mode.
