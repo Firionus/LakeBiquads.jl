@@ -1,5 +1,5 @@
 """
-	Peak(f, dBGain, BWoct)
+	Peak(f, dBGain, BWoct, fs=96e3)
 
 Return 96 kHz Biquad as DSP.SecondOrderSections that resembles Lake Peak EQ.
 
@@ -14,7 +14,7 @@ dBGain at the lower Bandwidth-defining point, e. g. 1 octave down from f when
 the Bandwidth is 2 octaves. The resulting Biquads correlated very well with
 measured frequency responses from the Lake Controller.
 """
-function Peak(f, dBGain, BWoct)
+function Peak(f, dBGain, BWoct, fs=96e3)
 	G_0 = 1 #gain at f=0
 	G = 10^(dBGain/20) #gain at peak
 	G_b = 10^(dBGain/40) #gain that defines bandwidth

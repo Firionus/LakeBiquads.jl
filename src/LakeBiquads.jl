@@ -4,8 +4,6 @@ export EQBiquads, BiquadArray, AllPass, HighPass, LowPass, Peak, HighShelf, LowS
 
 using DelimitedFiles, DSP, NLsolve
 
-fs=96e3
-
 include("Peak.jl")
 include("Shelf.jl")
 include("LowHighPass.jl")

@@ -1,5 +1,5 @@
 """
-	HighPass(type::Symbol, f, dBperOct)
+	HighPass(type::Symbol, f, dBperOct, fs=96e3)
 
 Return 96 kHz Biquad as DSP.SecondOrderSections that resembles the Highpass
 functions of the Lake EQ.
@@ -52,13 +52,13 @@ reversible with the right normalization for s. (see https://www.rane.com/note147
 
 Note that in contrast to the Lake Bessel lowpass filters, odd orders are not phase-inverted.
 """
-function HighPass(type::Symbol, f, dBperOct)
+function HighPass(type::Symbol, f, dBperOct, fs=96e3)
 	responsetype = Highpass(f, fs=fs)
 	return PassFilter(responsetype, type, dBperOct)
 end
 
 """
-	LowPass(type::Symbol, f, dBperOct)
+	LowPass(type::Symbol, f, dBperOct, fs=96e3)
 
 Return 96 kHz Biquad as DSP.SecondOrderSections that resembles the Lowpass
 functions of the Lake EQ.
@@ -96,7 +96,7 @@ filter after adjustment to the given frequency and filter type.
 
 Note that for odd orders of Bessel filters, the polarity is reversed.
 """
-function LowPass(type::Symbol, f, dBperOct)
+function LowPass(type::Symbol, f, dBperOct, fs=96e3)
 	responsetype = Lowpass(f, fs=fs)
 	return PassFilter(responsetype, type, dBperOct)
 end

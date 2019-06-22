@@ -1,5 +1,5 @@
 """
-	HighShelf(f, dBGain, BWoct)
+	HighShelf(f, dBGain, BWoct, fs=96e3)
 
 Return 96 kHz Biquad as DSP.SecondOrderSections that resembles Lake High Shelf EQ.
 
@@ -10,7 +10,7 @@ https://shepazu.github.io/Audio-EQ-Cookbook/audio-eq-cookbook.html (12.6.2019)
 where the analog Q formula is utilized instead of the prewarped version to
 fit the output of the Lake processor.
 """
-function HighShelf(f, dBGain, BWoct)
+function HighShelf(f, dBGain, BWoct, fs=96e3)
 	#intermediate variables
 	A = 10^(dBGain/40)
 	w0 = 2*pi*f/fs
@@ -29,7 +29,7 @@ function HighShelf(f, dBGain, BWoct)
 end
 
 """
-	LowShelf(f, dBGain, BWoct)
+	LowShelf(f, dBGain, BWoct, fs=96e3)
 
 Return 96 kHz Biquad as DSP.SecondOrderSections that resembles Lake Low Shelf EQ.
 
@@ -40,7 +40,7 @@ https://shepazu.github.io/Audio-EQ-Cookbook/audio-eq-cookbook.html (12.6.2019)
 where the analog Q formula is utilized instead of the prewarped version to
 fit the output of the Lake processor.
 """
-function LowShelf(f, dBGain, BWoct)
+function LowShelf(f, dBGain, BWoct, fs=96e3)
 	#intermediate variables
 	A = 10^(dBGain/40)
 	w0 = 2*pi*f/fs

@@ -1,5 +1,5 @@
 """
-	AllPass(f, order, BWoct)
+	AllPass(f, order, BWoct, fs=96e3)
 
 Return 96 kHz Biquad as DSP.SecondOrderSections that resembles Lake 1st- or
 2nd-order Allpass.
@@ -20,7 +20,7 @@ pole position at -1 and a polarity reversal, which already results in an
 analog 1st order Allpass prototype centered around 1 rad/s that can be used
 with the DSP.Lowpass responsetype (only shifts frequency) to design the Biquad.
 """
-function AllPass(f, order, BWoct)
+function AllPass(f, order, BWoct, fs=96e3)
 	w0 = 2*pi*f/fs
 	if order==2
 		BWoct = 2*BWoct #somehow necessary in Lake
