@@ -9,12 +9,18 @@ Linkwitz-Riley respectively. `dBperOct` must be one of [6, 12, 18, 24, 30, 36, 4
 
 # Implementation
 
-The design for the **Butterworth** filters uses the implementation by DSP.jl.
+## Butterworth
 
-The **Linkwitz-Riley** filter is constructed from two of these Butterworth stages
+The design for the Butterworth filters uses the implementation by DSP.jl.
+
+## Linkwitz-Riley
+
+The Linkwitz-Riley filters are constructed from two Butterworth stages
 at the same frequency.
 
-The **Bessel** filter is constructed from the Polynomial Representation given in:
+## Bessel
+
+The Bessel filters are constructed from the Polynomial Representation given in:
 
 https://onlinelibrary.wiley.com/doi/pdf/10.1002/9781119011866.app1 (12.6.2019)
 
@@ -29,7 +35,22 @@ for all orders of Bessel filters in the Lake processor at a frequency of 1 kHz
 were measured and are used to shift the Bessel prototype to fit the Lake
 filter after adjustment to the given frequency and filter type.
 
-Note that for odd orders of Bessel filters, the polarity is reversed.
+The transformation from lowpass prototype to highpass is then achieved by simply adding
+n zeros to the filter at 0+0im where n is the filter order.
+
+This is contrary to the standard method of converting a lowpass to
+highpass where the substitution s -> 1/s is performed. However, while
+this transformation does accurately mirror the Level response, the group delay
+of the newly created highpass is not flat anymore but peaked above orders of 2.
+This peak gets stronger the higher the order of the filter.
+
+Lake provides flat group delay response in Bessel highpass filters by adding zeros
+in the nominator, but not reversing the coefficient order in the denominator, both
+of which would happen in the substitution s -> 1/s. The Lake version is still
+approximately equal to the subtitution method because Bessel polynomials are approximately
+reversible with the right normalization for s. (see https://www.rane.com/note147.html (22.6.2019))
+
+Note that in contrast to the Lake Bessel lowpass filters, odd orders are not phase-inverted.
 """
 function HighPass(type::Symbol, f, dBperOct)
 	responsetype = Highpass(f, fs=fs)
@@ -47,12 +68,18 @@ Linkwitz-Riley respectively. `dBperOct` must be one of [6, 12, 18, 24, 30, 36, 4
 
 # Implementation
 
-The design for the **Butterworth** filters uses the implementation by DSP.jl.
+## Butterworth
 
-The **Linkiwtz-Riley** filter is constructed from two of these Butterworth stages
+The design for the Butterworth filters uses the implementation by DSP.jl.
+
+## Linkwitz-Riley
+
+The Linkwitz-Riley filters are constructed from two Butterworth stages
 at the same frequency.
 
-The **Bessel** filter is constructed from the Polynomial Representation given in:
+## Bessel
+
+The Bessel filters are constructed from the Polynomial Representation given in:
 
 https://onlinelibrary.wiley.com/doi/pdf/10.1002/9781119011866.app1 (12.6.2019)
 
@@ -77,7 +104,8 @@ end
 """
 	Bessel(N::Int)
 
-Return analog Bessel prototype as DSP.ZeroPoleGain that fits Lake EQ after transformation
+Return analog Bessel lowpass prototype as DSP.ZeroPoleGain that fits Lake EQ
+after transformation.
 """
 function Bessel(N::Int)
 	b(n::Int) = factorial(2*N-n)//(2^(N-n)*factorial(N-n)*factorial(n))
@@ -91,7 +119,6 @@ function Bessel(N::Int)
 
 	myfilter = PolynomialRatio(nominator, denominator)
 	myfilter2 = convert(ZeroPoleGain, myfilter)
-
 
 	#construct function for NLsolve to find -3dB point
 	myfilterdB(w) = 20*log10.(abs.(freqs(myfilter2, w)))
