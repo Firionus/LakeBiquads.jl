@@ -1,8 +1,9 @@
 using LakeBiquads, DelimitedFiles, DSP, Test
 fs=96e3
 
-#for testplot
-include("utils.jl")
+#enable for testplot
+#requires PyPlot
+#include("utils.jl")
 
 function compareReference(refName, testFilter; fStart = nothing, fStop=22e3, plot=false)
     plot && testplot(refName, testFilter)
@@ -67,7 +68,7 @@ end
         #Highpass Bessel
         @test compareReference("HPBS6 1k.csv", HighPass(:BS, 1e3, 6), fStart=15, plot=false)
         @test compareReference("HPBS12 1k.csv", HighPass(:BS, 1e3, 12), fStart=150, plot=false)
-        @test compareReference("HPBS18 1k.csv", HighPass(:BS, 1e3, 18), fStart=150, plot=true)
+        @test compareReference("HPBS18 1k.csv", HighPass(:BS, 1e3, 18), fStart=150, plot=false)
         @test compareReference("HPBS24 1k.csv", HighPass(:BS, 1e3, 24), fStart=300, plot=false)
         @test compareReference("HPBS30 1k.csv", HighPass(:BS, 1e3, 30), fStart=350, plot=false)
         @test compareReference("HPBS36 1k.csv", HighPass(:BS, 1e3, 36), fStart=400, plot=false)
