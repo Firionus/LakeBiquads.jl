@@ -40,11 +40,6 @@ end
 Parse the given EQ file as Lake EQs and create a new file "nameBiquads.format"
 with 96kHz Biquads in space seperated format.
 
-All biquadratic Lake EQs (not the Raised Cosine or Mesa-Filters) were
-reverse engineered, so that 96 kHz Biquads can be calculated that closely or
-maybe perfectly mimic the level and phase response of a Lake Controller
-with the same EQ settings.
-
 The EQ file allows specification of the Allpass, Peak, Highshelf, Lowshelf,
 Lowpass and Highpass Filters in the following format:
 
