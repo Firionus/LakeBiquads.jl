@@ -20,7 +20,7 @@ transfer characteristic as Lake EQs at 96kHz.
 In order to work with filter constructs, the package depends heavily on
 DSP.jl and may currently be affected by problems like https://github.com/JuliaDSP/DSP.jl/pull/284.
 
-**Disclaimer**
+**Validation**
 
 All tested EQs are automatically validated against measured curves of a PLM 20K44
 in the unit tests with an accuracy of +- 0.5 deg in phase and +- 0.07 dB in level throughout
