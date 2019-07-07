@@ -12,7 +12,7 @@ the possibility for automatic equalization towards a given target response.
 96 kHz is the Biquad calculation frequency for all Lake DSPs I am aware of and default
 throughout the library. Since this library can serve as general factory for Audio EQs, the
 sampling frequency for the single filters can be adjusted to your needs.
-Due to the symmetry at the Nyquist frequency sampling rate has a strong effect on
+Due to the symmetry at the Nyquist frequency, sampling rate has a strong effect on
 the shape of the Biquad filters, especially at high frequencies and bandwidths.
 This means that filters at different sampling rates will not have the same
 transfer characteristic as Lake EQs at 96kHz.
@@ -27,7 +27,7 @@ in the unit tests with an accuracy of +- 0.5 deg in phase and +- 0.07 dB in leve
 the relevant passband.
 Not all available filter functions were measured and the range of tested filter
 parameters is small. I can give no guarantee on how accurately the Biquads represent
-original Lake EQs. For example additional delay when stacking multiple parametrics is not modelled here.
+original Lake EQs.
 
 For details of the validation refer to the unit tests in the test folder.
 

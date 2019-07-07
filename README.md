@@ -13,7 +13,7 @@ All biquadratic EQ algorithms of Lake Controller (not the Raised Cosine or Mesa-
 This allows a deeper understanding of what Lake's filters actually do and opens up the possibility for automatic equalization towards a given target response.
 
 
-96 kHz is the Biquad calculation frequency for all Lake DSPs I am aware of and default throughout the library. Since this library can serve as general factory for Audio EQs, the sampling frequency for the single filters can be adjusted to your needs. Due to the symmetry at the Nyquist frequency sampling rate has a strong effect on the shape of the Biquad filters, especially at high frequencies and bandwidths. This means that filters at different sampling rates will not have the same transfer characteristic as Lake EQs at 96kHz.
+96 kHz is the Biquad calculation frequency for all Lake DSPs I am aware of and default throughout the library. Since this library can serve as general factory for Audio EQs, the sampling frequency for the single filters can be adjusted to your needs. Due to the symmetry at the Nyquist frequency, sampling rate has a strong effect on the shape of the Biquad filters, especially at high frequencies and bandwidths. This means that filters at different sampling rates will not have the same transfer characteristic as Lake EQs at 96kHz.
 
 
 In order to work with filter constructs, the package depends heavily on DSP.jl and may currently be affected by problems like https://github.com/JuliaDSP/DSP.jl/pull/284.
@@ -22,7 +22,7 @@ In order to work with filter constructs, the package depends heavily on DSP.jl a
 **Validation**
 
 
-All tested EQs are automatically validated against measured curves of a PLM 20K44 in the unit tests with an accuracy of +- 0.5 deg in phase and +- 0.07 dB in level throughout the relevant passband. Not all available filter functions were measured and the range of tested filter parameters is small. I can give no guarantee on how accurately the Biquads represent original Lake EQs. For example additional delay when stacking multiple parametrics is not modelled here.
+All tested EQs are automatically validated against measured curves of a PLM 20K44 in the unit tests with an accuracy of +- 0.5 deg in phase and +- 0.07 dB in level throughout the relevant passband. Not all available filter functions were measured and the range of tested filter parameters is small. I can give no guarantee on how accurately the Biquads represent original Lake EQs.
 
 
 For details of the validation refer to the unit tests in the test folder.
@@ -97,7 +97,7 @@ AP 3e3 1 2   #Allpass at 3 kHz of order 1 with a Bandwidth of 2 octaves (order m
 ```
 
 
-<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/02a27212ea551749d85c8ef04a79e190a1c16bfd/src/LakeBiquads.jl#L37-L69' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/4bb1554476b58653592ef6e2b8f4b035280bec83/src/LakeBiquads.jl#L37-L69' class='documenter-source'>source</a><br>
 
 
 <a id='Single-Filters-1'></a>
@@ -125,7 +125,7 @@ Orfanidis, JAES 1997 Issue 6: "Digital Parametric Equalizer Design with Prescrib
 In contrast to the method presented in the paper, this function does not define linear Δf based on Bandwidth but forces the level to be half of dBGain at the lower Bandwidth-defining point, e. g. 1 octave down from f when the Bandwidth is 2 octaves. The resulting Biquads correlated very well with measured frequency responses from the Lake Controller.
 
 
-<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/02a27212ea551749d85c8ef04a79e190a1c16bfd/src/Peak.jl#L1-L16' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/4bb1554476b58653592ef6e2b8f4b035280bec83/src/Peak.jl#L1-L16' class='documenter-source'>source</a><br>
 
 <a id='LakeBiquads.HighShelf' href='#LakeBiquads.HighShelf'>#</a>
 **`LakeBiquads.HighShelf`** &mdash; *Function*.
@@ -145,7 +145,7 @@ https://shepazu.github.io/Audio-EQ-Cookbook/audio-eq-cookbook.html (12.6.2019)
 where the analog Q formula is utilized instead of the prewarped version to fit the output of the Lake processor.
 
 
-<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/02a27212ea551749d85c8ef04a79e190a1c16bfd/src/Shelf.jl#L1-L12' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/4bb1554476b58653592ef6e2b8f4b035280bec83/src/Shelf.jl#L1-L12' class='documenter-source'>source</a><br>
 
 <a id='LakeBiquads.LowShelf' href='#LakeBiquads.LowShelf'>#</a>
 **`LakeBiquads.LowShelf`** &mdash; *Function*.
@@ -165,7 +165,7 @@ https://shepazu.github.io/Audio-EQ-Cookbook/audio-eq-cookbook.html (12.6.2019)
 where the analog Q formula is utilized instead of the prewarped version to fit the output of the Lake processor.
 
 
-<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/02a27212ea551749d85c8ef04a79e190a1c16bfd/src/Shelf.jl#L31-L42' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/4bb1554476b58653592ef6e2b8f4b035280bec83/src/Shelf.jl#L31-L42' class='documenter-source'>source</a><br>
 
 <a id='LakeBiquads.LowPass' href='#LakeBiquads.LowPass'>#</a>
 **`LakeBiquads.LowPass`** &mdash; *Function*.
@@ -203,7 +203,7 @@ The resulting filter is normalized to be -3 dB at 1 rad/s. The -3 dB frequencies
 Note that for odd orders of Bessel filters, the polarity is reversed.
 
 
-<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/02a27212ea551749d85c8ef04a79e190a1c16bfd/src/LowHighPass.jl#L58-L94' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/4bb1554476b58653592ef6e2b8f4b035280bec83/src/LowHighPass.jl#L58-L94' class='documenter-source'>source</a><br>
 
 <a id='LakeBiquads.HighPass' href='#LakeBiquads.HighPass'>#</a>
 **`LakeBiquads.HighPass`** &mdash; *Function*.
@@ -247,7 +247,7 @@ Lake provides flat group delay response in Bessel highpass filters by adding zer
 Note that in contrast to the Lake Bessel lowpass filters, odd orders are not phase-inverted.
 
 
-<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/02a27212ea551749d85c8ef04a79e190a1c16bfd/src/LowHighPass.jl#L1-L52' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/4bb1554476b58653592ef6e2b8f4b035280bec83/src/LowHighPass.jl#L1-L52' class='documenter-source'>source</a><br>
 
 <a id='LakeBiquads.AllPass' href='#LakeBiquads.AllPass'>#</a>
 **`LakeBiquads.AllPass`** &mdash; *Function*.
@@ -271,7 +271,7 @@ where the analog Q formula is utilized instead of the prewarped version to fit t
 The 1st order Allpass is constructed from the simple zero position at 1 and pole position at -1 and a polarity reversal, which already results in an analog 1st order Allpass prototype centered around 1 rad/s that can be used with the DSP.Lowpass responsetype (only shifts frequency) to design the Biquad.
 
 
-<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/02a27212ea551749d85c8ef04a79e190a1c16bfd/src/Allpass.jl#L1-L22' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/4bb1554476b58653592ef6e2b8f4b035280bec83/src/Allpass.jl#L1-L22' class='documenter-source'>source</a><br>
 
 
 <a id='Utilities-1'></a>
@@ -300,7 +300,7 @@ The returned Array for 2 Biquads is of the structure:
 Note that the Gain of the SecondOrderSections is spread evenly over all Biquads.
 
 
-<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/02a27212ea551749d85c8ef04a79e190a1c16bfd/src/LakeBiquads.jl#L12-L25' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/4bb1554476b58653592ef6e2b8f4b035280bec83/src/LakeBiquads.jl#L12-L25' class='documenter-source'>source</a><br>
 
 <a id='LakeBiquads.Bessel' href='#LakeBiquads.Bessel'>#</a>
 **`LakeBiquads.Bessel`** &mdash; *Function*.
@@ -314,7 +314,7 @@ Bessel(N::Int)
 Return analog Bessel lowpass prototype as DSP.ZeroPoleGain that fits Lake EQ after transformation.
 
 
-<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/02a27212ea551749d85c8ef04a79e190a1c16bfd/src/LowHighPass.jl#L100-L105' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/Firionus/LakeBiquads.jl/blob/4bb1554476b58653592ef6e2b8f4b035280bec83/src/LowHighPass.jl#L100-L105' class='documenter-source'>source</a><br>
 
 
 <a id='Filter-conversion-1'></a>
