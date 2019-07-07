@@ -15,6 +15,9 @@ the Bandwidth is 2 octaves. The resulting Biquads correlated very well with
 measured frequency responses from the Lake Controller.
 """
 function Peak(f, dBGain, BWoct, fs=96e3)
+	if dBGain==0
+		return SecondOrderSections(ZeroPoleGain(Float64[], Float64[], 1.))
+	end
 	G_0 = 1 #gain at f=0
 	G = 10^(dBGain/20) #gain at peak
 	G_b = 10^(dBGain/40) #gain that defines bandwidth

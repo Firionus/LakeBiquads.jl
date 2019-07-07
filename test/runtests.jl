@@ -81,4 +81,7 @@ end
         #read resulting file and compare to single calculated filters to check for
         #parse errors
     end
+
+    #Peak with 0dB gain should give unity filter
+    @test freqz(Peak(10e3, 0, 1), range(0, stop=π, length=250)) ≈ ones(250)
 end
