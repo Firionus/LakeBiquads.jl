@@ -2,6 +2,7 @@
 read all WinMF *.mat files in current folder and convert them to log scaled csv
 frequency responses
 """
+
 using MAT, Dierckx, DelimitedFiles, myutils
 
 function logResample(data1::Vector, samplerate::Number, fLog=logrange(10, 23e3, points_per_octave=96))
